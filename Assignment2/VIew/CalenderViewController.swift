@@ -125,14 +125,14 @@ class CalenderViewController: DayViewController , EKEventEditViewDelegate{
     }
     
     override func dayView(dayView: DayView, didTapTimelineAt date: Date) {
-            endEventEditing()
-        }
+        endEventEditing()
+    }
     
     func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
-            endEventEditing()
-            reloadData()
-            controller.dismiss(animated: true, completion: nil)
-        }
+        endEventEditing()
+        reloadData()
+        controller.dismiss(animated: true, completion: nil)
+    }
     
     @objc func actionCreateNewEvent() {
         self.dayView(dayView: dayView, didLongPressTimelineAt: Date())
