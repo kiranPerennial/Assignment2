@@ -110,6 +110,11 @@
                             <constraint firstItem="5Hi-5l-MEk" firstAttribute="leading" secondItem="szf-dL-nKI" secondAttribute="leading" constant="40" id="oHy-OB-Xpn"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="4pQ-M2-Ix5" id="a6T-qO-mTy"/>
+                        <outlet property="passwordTextField" destination="RqE-Wx-P1O" id="PbP-l7-pUt"/>
+                        <outlet property="signupButton" destination="0JT-nd-YDA" id="cSk-Qy-nuV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xjH-VE-VXo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

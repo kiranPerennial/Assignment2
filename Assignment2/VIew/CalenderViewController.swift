@@ -1,10 +1,3 @@
-//
-//  ViewController.swift
-//  Assignment2
-//
-//  Created by APPLE on 15/11/21.
-//
-
 import UIKit
 import CalendarKit
 import EventKit
@@ -13,7 +6,7 @@ import EventKitUI
 class CalenderViewController: DayViewController , EKEventEditViewDelegate{
     
     var eventStore = EKEventStore()
-    var viewModel:CalendarViewModel!
+    var viewModel: CalendarViewModel!
     override func viewDidLoad() {
         super.viewDidLoad()
         requestAccessToCalendar()
@@ -61,10 +54,9 @@ class CalenderViewController: DayViewController , EKEventEditViewDelegate{
         self.navigationItem.setHidesBackButton(true, animated: false)
         let logoutBarButtonItem = UIBarButtonItem(title: "Logout", style: .done, target: self, action: #selector(actionLogoutUser))
         self.navigationItem.leftBarButtonItem  = logoutBarButtonItem
-        let createEventBarButtonItem = UIBarButtonItem(title: "Logout", style: .done, target: self, action: #selector(actionCreateNewEvent))
+        let createEventBarButtonItem = UIBarButtonItem(title: "", style: .done, target: self, action: #selector(actionCreateNewEvent))
         createEventBarButtonItem.image = UIImage(systemName: "plus")
         self.navigationItem.rightBarButtonItem  = createEventBarButtonItem
-        //viewModel.getAllEvents(eventStore: eventStore,date:Date())
     }
     
     @objc func actionLogoutUser() {
@@ -98,32 +90,6 @@ class CalenderViewController: DayViewController , EKEventEditViewDelegate{
     
     // MARK: Event Editing
     
-    override func dayView(dayView: DayView, didLongPressTimelineAt date: Date) {
-        // Cancel editing current event and start creating a new one
-        endEventEditing()
-        viewModel.createNewEvent(date)
-    }
-    
-    override func dayView(dayView: DayView, didUpdate event: EventDescriptor) {
-        guard let editingEvent = event as? EKWrapper else { return }
-        if let originalEvent = event.editedEvent {
-            editingEvent.commitEditing()
-            
-            if originalEvent === editingEvent {
-                // If editing event is the same as the original one, it has just been created.
-                // Showing editing view controller
-                viewModel.addNewEvent(ekEvent: editingEvent.ekEvent)
-            } else {
-                // If editing event is different from the original,
-                // then it's pointing to the event already in the `eventStore`
-                // Let's save changes to oriignal event to the `eventStore`
-                try! eventStore.save(editingEvent.ekEvent,
-                                     span: .thisEvent)
-            }
-        }
-        reloadData()
-    }
-    
     override func dayView(dayView: DayView, didTapTimelineAt date: Date) {
         endEventEditing()
     }
@@ -131,11 +97,12 @@ class CalenderViewController: DayViewController , EKEventEditViewDelegate{
     func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
         endEventEditing()
         reloadData()
-        controller.dismiss(animated: true, completion: nil)
+        viewModel.didTapCompleteEditing()
     }
     
     @objc func actionCreateNewEvent() {
-        self.dayView(dayView: dayView, didLongPressTimelineAt: Date())
+        endEventEditing()
+        viewModel.createNewEvent(Date())
     }
 }
 

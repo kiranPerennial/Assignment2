@@ -1,9 +1,3 @@
-//
-//  CalendarCoordinator.swift
-//  CalendarApp-MVVM
-//
-
-
 import Foundation
 import UIKit
 import EventKit
@@ -13,7 +7,6 @@ import RxSwift
 class CalendarCoordinator: Coordinator , StoryboardInitializable {
     var rootViewController: UINavigationController!
     var calenderViewController: CalenderViewController!
-    let eventController = EKEventEditViewController()
     let disposeBag = DisposeBag()
     
     func start() -> UIViewController {
@@ -23,10 +16,11 @@ class CalendarCoordinator: Coordinator , StoryboardInitializable {
         }).disposed(by: disposeBag)
         viewModel.updateEvent.subscribe(onNext: { [weak self] in self?.updateEvent(event: $0)
         }).disposed(by: disposeBag)
-        viewModel.addNewEvent.subscribe(onNext: { [weak self] in self?.addEvent(event: $0)
-        }).disposed(by: disposeBag)
         viewModel.logOutUser.subscribe(onNext: {[weak self] in
             self?.logoutUser()
+        }).disposed(by: disposeBag)
+        viewModel.completeEditing.subscribe(onNext: {[weak self] in
+            self?.completeEditing()
         }).disposed(by: disposeBag)
         calenderViewController.viewModel = viewModel
         return calenderViewController
@@ -44,16 +38,12 @@ extension CalendarCoordinator {
                                                  animated: true)
     }
     
-    func addEvent(event: EKEvent) {
-        let eventEditViewController = EKEventEditViewController()
-        eventEditViewController.event = event
-        eventEditViewController.eventStore = calenderViewController.eventStore
-        eventEditViewController.editViewDelegate = calenderViewController
-        rootViewController.present(eventEditViewController, animated: true, completion: nil)
-    }
-    
     func logoutUser() {
         self.rootViewController.popViewController(animated: true)
+    }
+    
+    func completeEditing() {
+        self.rootViewController.dismiss(animated: true, completion: nil)
     }
     
     func createNewEvent(date: Date) {
@@ -72,5 +62,11 @@ extension CalendarCoordinator {
         newEKWrapper.editedEvent = newEKWrapper
     
         calenderViewController.create(event: newEKWrapper, animated: true)
+        
+        let eventEditViewController = EKEventEditViewController()
+        eventEditViewController.event = newEKWrapper.ekEvent
+        eventEditViewController.eventStore = calenderViewController.eventStore
+        eventEditViewController.editViewDelegate = calenderViewController
+        rootViewController.present(eventEditViewController, animated: true, completion: nil)
     }
 }

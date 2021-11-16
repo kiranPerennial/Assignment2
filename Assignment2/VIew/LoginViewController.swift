@@ -1,10 +1,3 @@
-//
-//  LoginViewController.swift
-//  Assignment2
-//
-//  Created by APPLE on 15/11/21.
-//
-
 import UIKit
 import RxSwift
 
@@ -46,8 +39,4 @@ class LoginViewController: UIViewController {
         signupButton.rx.tap
             .bind(to: viewModel.showSignUp).disposed(by: disposeBag)
     }
-    
-//    @IBAction func tapGesture(_ sender: Any) {
-//        self.view.endEditing(true)
-//    }
 }
