@@ -1,11 +1,5 @@
-//
-//  AppCoordinator.swift
-//  CalendarApp-MVVM
-//
-
 import Foundation
 import UIKit
-
 
 protocol Coordinator {
     func start() -> UIViewController

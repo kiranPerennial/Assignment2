@@ -1,9 +1,3 @@
-//
-//  LoginCoordinator.swift
-//  CalendarApp-MVVM
-//
-
-
 import Foundation
 import UIKit
 import RxSwift
@@ -25,7 +19,7 @@ class LoginCoordinator: Coordinator, StoryboardInitializable {
         viewModel.showSignUp.asObservable().subscribe(onNext:{ _ in
                 self.showSignUp()
             }).disposed(by: disposeBag)
-        viewModel.showError.subscribe(onNext: { [weak self] in self?.showErrorAlert(errorType: $0)}).disposed(by: disposeBag)
+        viewModel.showError.subscribe(onNext: { [weak self] in self?.showErrorAlert(errorMessage: $0)}).disposed(by: disposeBag)
         return loginViewController
     }
 }
@@ -44,8 +38,9 @@ extension LoginCoordinator {
         let signUpVC = signUpCoordinator.start()
         self.rootViewController.pushViewController(signUpVC, animated: true)
     }
-    func showErrorAlert(errorType:loginMessage) {
-        loginViewController.showAlert(title: "My Calendar", message: errorType.rawValue)
+    
+    func showErrorAlert(errorMessage: String) {
+        loginViewController.showAlert(title: "My Calendar", message: errorMessage)
     }
     
 }

@@ -26,6 +26,7 @@
 		18921FD427423D1700497C2C /* Support.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18921FD327423D1700497C2C /* Support.swift */; };
 		18921FD627423E7C00497C2C /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18921FD527423E7C00497C2C /* Model.swift */; };
 		18921FD8274248D000497C2C /* EventWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18921FD7274248D000497C2C /* EventWrapper.swift */; };
+		18921FDA2743AF0000497C2C /* ServiceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18921FD92743AEFF00497C2C /* ServiceRequest.swift */; };
 		83381875862EA198DAF3D981 /* Pods_Assignment2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1651550C7C48D8DCF7ADF32 /* Pods_Assignment2.framework */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,7 @@
 		18921FD327423D1700497C2C /* Support.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Support.swift; sourceTree = "<group>"; };
 		18921FD527423E7C00497C2C /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		18921FD7274248D000497C2C /* EventWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventWrapper.swift; sourceTree = "<group>"; };
+		18921FD92743AEFF00497C2C /* ServiceRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceRequest.swift; sourceTree = "<group>"; };
 		6F47BBEC1D1EC9B4870325F4 /* Pods-Assignment2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Assignment2.debug.xcconfig"; path = "Target Support Files/Pods-Assignment2/Pods-Assignment2.debug.xcconfig"; sourceTree = "<group>"; };
 		75E868FC3A57580EAECAF5AD /* Pods-Assignment2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Assignment2.release.xcconfig"; path = "Target Support Files/Pods-Assignment2/Pods-Assignment2.release.xcconfig"; sourceTree = "<group>"; };
 		D1651550C7C48D8DCF7ADF32 /* Pods_Assignment2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Assignment2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,6 +101,7 @@
 				18921FAD27422D8C00497C2C /* LaunchScreen.storyboard */,
 				18921FB027422D8C00497C2C /* Info.plist */,
 				18921FD327423D1700497C2C /* Support.swift */,
+				18921FD92743AEFF00497C2C /* ServiceRequest.swift */,
 				18921FD127423C2D00497C2C /* Extension.swift */,
 				18921FD527423E7C00497C2C /* Model.swift */,
 				18921FD7274248D000497C2C /* EventWrapper.swift */,
@@ -268,6 +271,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18921FDA2743AF0000497C2C /* ServiceRequest.swift in Sources */,
 				18921FD8274248D000497C2C /* EventWrapper.swift in Sources */,
 				18921FD627423E7C00497C2C /* Model.swift in Sources */,
 				18921FCE274239EA00497C2C /* LoginViewController.swift in Sources */,

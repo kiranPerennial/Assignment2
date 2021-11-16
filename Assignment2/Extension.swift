@@ -1,9 +1,3 @@
-//
-//  Extension.swift
-//  CalendarApp-MVVM
-//
-
-
 import Foundation
 import UIKit
 extension StoryboardInitializable where Self:Coordinator {
