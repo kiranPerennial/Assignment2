@@ -49,7 +49,7 @@ extension CalendarCoordinator {
     func createNewEvent(date: Date) {
         let newEKEvent = EKEvent(eventStore: calenderViewController.eventStore)
         newEKEvent.calendar = calenderViewController.eventStore.defaultCalendarForNewEvents
-        
+        newEKEvent.url = URL(string: calenderViewController.user!.email)
         var components = DateComponents()
         components.hour = 1
         let endDate = calenderViewController.calendar.date(byAdding: components, to: date)

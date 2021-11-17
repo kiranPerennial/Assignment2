@@ -7,6 +7,7 @@ class CalenderViewController: DayViewController , EKEventEditViewDelegate{
     
     var eventStore = EKEventStore()
     var viewModel: CalendarViewModel!
+    var user: User?
     override func viewDidLoad() {
         super.viewDidLoad()
         requestAccessToCalendar()
@@ -77,8 +78,8 @@ class CalenderViewController: DayViewController , EKEventEditViewDelegate{
         
         let eventKitEvents = eventStore.events(matching: predicate) // All events happening on a given day
         let calendarKitEvents = eventKitEvents.map(EKWrapper.init)
-        
-        return calendarKitEvents
+        let filteredEvents = calendarKitEvents.filter { wrapper in wrapper.ekEvent.url?.absoluteString == self.user?.email || wrapper.ekEvent.url?.absoluteString == "" }
+        return filteredEvents
     }
     
     override func dayViewDidSelectEventView(_ eventView: EventView) {
