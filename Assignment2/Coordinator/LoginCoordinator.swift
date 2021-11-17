@@ -13,8 +13,8 @@ class LoginCoordinator: Coordinator, StoryboardInitializable {
         loginViewController = LoginCoordinator.instantiateViewController(storyboardName: .Main, identifier: LoginViewController.storyboardIdentifier) as? LoginViewController
         let viewModel = LoginViewModel()
         loginViewController.viewModel = viewModel
-        viewModel.showHome.asObservable().subscribe(onNext:{ _ in
-                self.showHome()
+        viewModel.showHome.asObservable().subscribe(onNext:{ user in
+                self.showHome(user: user)
             }).disposed(by: disposeBag)
         viewModel.showSignUp.asObservable().subscribe(onNext:{ _ in
                 self.showSignUp()
@@ -25,11 +25,13 @@ class LoginCoordinator: Coordinator, StoryboardInitializable {
 }
 
 extension LoginCoordinator {
-    func showHome() {
+    func showHome(user: User) {
         calendarCoordinator = CalendarCoordinator()
         calendarCoordinator.rootViewController = rootViewController
-        let calendarVC = calendarCoordinator.start()
-        self.rootViewController.pushViewController(calendarVC, animated: true)
+        let viewController = calendarCoordinator.start()
+        let calendarVC = viewController as? CalenderViewController
+        calendarVC?.user = user
+        self.rootViewController.pushViewController(calendarVC!, animated: true)
     }
     
     func showSignUp() {

@@ -61,6 +61,8 @@ final class EKWrapper: EventDescriptor {
     
     public private(set) var ekEvent: EKEvent
     
+    public var user: User?
+    
     public init(eventKitEvent: EKEvent) {
         self.ekEvent = eventKitEvent
         applyStandardColors()

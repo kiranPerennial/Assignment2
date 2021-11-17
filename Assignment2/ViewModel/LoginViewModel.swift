@@ -6,7 +6,7 @@ class LoginViewModel {
     var user: User?
     let emailSubject = PublishSubject<String>()
     let passwordSubject = PublishSubject<String>()
-    let showHome = PublishSubject<Void>()
+    let showHome = PublishSubject<User>()
     let showSignUp = PublishSubject<Void>()
     let showError = PublishSubject<String>()
     
@@ -24,7 +24,7 @@ class LoginViewModel {
             if let allUser = ServiceRequest.retrieve("CalenderUsers.json", as: [User].self) {
                 let user = allUser.filter{ $0.email == user.email && $0.password == user.password }
                 if user.count > 0 {
-                    self.showHome.onNext(Void())
+                    self.showHome.onNext(user[0])
                 } else {
                     self.showError.onNext("Please Enter Valid Email and Password")
                 }
