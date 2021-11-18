@@ -30,7 +30,7 @@ extension LoginCoordinator {
         calendarCoordinator.rootViewController = rootViewController
         let viewController = calendarCoordinator.start()
         let calendarVC = viewController as? CalenderViewController
-        calendarVC?.user = user
+        calendarVC?.viewModel.user = user
         self.rootViewController.pushViewController(calendarVC!, animated: true)
     }
     

@@ -2,8 +2,7 @@ import Foundation
 import RxSwift
 
 class SignUpViewModel {
-    private var user: User?
-    private let minPasswordCharacters = 6
+    var user: User?
     let showLogin = PublishSubject<Void>()
     let emailSubject = PublishSubject<String>()
     let passwordSubject = PublishSubject<String>()

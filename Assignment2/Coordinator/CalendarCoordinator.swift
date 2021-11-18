@@ -12,7 +12,7 @@ class CalendarCoordinator: Coordinator , StoryboardInitializable {
     func start() -> UIViewController {
         calenderViewController = CalenderViewController()
         let viewModel = CalendarViewModel()
-        viewModel.createNewEvent.subscribe(onNext: { [weak self] in self?.createNewEvent(date: $0)
+        viewModel.createNewEvent.subscribe(onNext: { [weak self] in self?.createNewEvent(newEKWrapper: $0)
         }).disposed(by: disposeBag)
         viewModel.updateEvent.subscribe(onNext: { [weak self] in self?.updateEvent(event: $0)
         }).disposed(by: disposeBag)
@@ -46,23 +46,8 @@ extension CalendarCoordinator {
         self.rootViewController.dismiss(animated: true, completion: nil)
     }
     
-    func createNewEvent(date: Date) {
-        let newEKEvent = EKEvent(eventStore: calenderViewController.eventStore)
-        newEKEvent.calendar = calenderViewController.eventStore.defaultCalendarForNewEvents
-        newEKEvent.url = URL(string: calenderViewController.user!.email)
-        var components = DateComponents()
-        components.hour = 1
-        let endDate = calenderViewController.calendar.date(byAdding: components, to: date)
-        
-        newEKEvent.startDate = date
-        newEKEvent.endDate = endDate
-        newEKEvent.title = "New event"
-        
-        let newEKWrapper = EKWrapper(eventKitEvent: newEKEvent)
-        newEKWrapper.editedEvent = newEKWrapper
-    
+    func createNewEvent(newEKWrapper: EKWrapper) {
         calenderViewController.create(event: newEKWrapper, animated: true)
-        
         let eventEditViewController = EKEventEditViewController()
         eventEditViewController.event = newEKWrapper.ekEvent
         eventEditViewController.eventStore = calenderViewController.eventStore

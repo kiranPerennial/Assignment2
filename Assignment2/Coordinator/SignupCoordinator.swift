@@ -1,5 +1,4 @@
 import Foundation
-import Foundation
 import UIKit
 import RxSwift
 
@@ -7,6 +6,7 @@ class SignUpCoordinator: Coordinator, StoryboardInitializable {
     var rootViewController:UINavigationController!
     var signupViewController:SignupViewController!
     let disposeBag = DisposeBag()
+
     func start()->UIViewController{
         signupViewController = SignUpCoordinator.instantiateViewController(storyboardName: .Main, identifier: SignupViewController.storyboardIdentifier) as? SignupViewController
         let viewModel = SignUpViewModel()
