@@ -12,7 +12,6 @@ class LoginViewModel {
     
     var isValidForm: Observable<Bool> {
         return Observable.combineLatest(emailSubject, passwordSubject) {email, password in
-            
             let status = email.isValidEmail() && password.isValidPassword()
             self.user = User(email: email, password: password)
             return status
@@ -30,9 +29,5 @@ class LoginViewModel {
                 }
             }
         }
-    }
-    
-    func didtapSignup() {
-        showSignUp.onNext(Void())
     }
 }

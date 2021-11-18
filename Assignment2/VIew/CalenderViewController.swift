@@ -7,7 +7,6 @@ class CalenderViewController: DayViewController , EKEventEditViewDelegate{
     
     var eventStore = EKEventStore()
     var viewModel: CalendarViewModel!
-    var user: User?
     override func viewDidLoad() {
         super.viewDidLoad()
         requestAccessToCalendar()
@@ -43,15 +42,10 @@ class CalenderViewController: DayViewController , EKEventEditViewDelegate{
         reloadData()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.isToolbarHidden = true
-    }
-    
     func setupUI() {
         self.navigationController?.toolbar.isHidden = true
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.isHidden = false
-        self.navigationController?.navigationBar.backgroundColor = .white
         self.navigationItem.setHidesBackButton(true, animated: false)
         let logoutBarButtonItem = UIBarButtonItem(title: "Logout", style: .done, target: self, action: #selector(actionLogoutUser))
         self.navigationItem.leftBarButtonItem  = logoutBarButtonItem
@@ -78,7 +72,9 @@ class CalenderViewController: DayViewController , EKEventEditViewDelegate{
         
         let eventKitEvents = eventStore.events(matching: predicate) // All events happening on a given day
         let calendarKitEvents = eventKitEvents.map(EKWrapper.init)
-        let filteredEvents = calendarKitEvents.filter { wrapper in wrapper.ekEvent.url?.absoluteString == self.user?.email || wrapper.ekEvent.url?.absoluteString == "" }
+        let filteredEvents = calendarKitEvents.filter { [weak self] wrapper in
+            self!.viewModel.filterEvent(wrapper.ekEvent.url?.absoluteString ?? "")
+        }
         return filteredEvents
     }
     
@@ -103,7 +99,7 @@ class CalenderViewController: DayViewController , EKEventEditViewDelegate{
     
     @objc func actionCreateNewEvent() {
         endEventEditing()
-        viewModel.createNewEvent(Date())
+        viewModel.createNewEvent(Date(), eventStore: self.eventStore)
     }
 }
 

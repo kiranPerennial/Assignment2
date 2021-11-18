@@ -1,10 +1,3 @@
-//
-//  SignupViewController.swift
-//  Assignment2
-//
-//  Created by APPLE on 15/11/21.
-//
-
 import UIKit
 import RxSwift
 
@@ -19,6 +12,7 @@ class SignupViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.isHidden = false
         setupBinding()
     }
     

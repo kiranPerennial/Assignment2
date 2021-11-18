@@ -8,7 +8,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     
-    var viewModel:LoginViewModel!
+    var viewModel: LoginViewModel!
     let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -34,7 +34,7 @@ class LoginViewController: UIViewController {
         passwordTextField.rx.text.orEmpty.bind(to: viewModel.passwordSubject).disposed(by: disposeBag)
         viewModel.isValidForm.bind(to: loginButton.rx.isEnabled).disposed(by: disposeBag)
         loginButton.rx.tap
-            .bind { [weak self] in self?.viewModel?.didTapLogin()}
+            .bind { [weak self] in self?.viewModel?.didTapLogin() }
             .disposed(by: disposeBag)
         signupButton.rx.tap
             .bind(to: viewModel.showSignUp).disposed(by: disposeBag)
